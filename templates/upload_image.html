@@ -1,0 +1,27 @@
+<!doctype html>
+<head>
+    <title>Retouch API</title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        <h3>Please add image, mask and prompt </h3>
+        <table>
+            <tr>
+                <td>Image</td>
+                <td><input type="file" name="image" multiple></td>
+            <tr>
+            <tr>
+                <td>Mask</td>
+                <td><input type="file" name="mask" multiple></td>
+            <tr>
+            <tr>
+                <td>Prompt</td>
+                <td><input type="text" name="prompt"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Upload" /></td>
+            </tr>
+        </table>
+    </form>
+</body>
