@@ -158,7 +158,7 @@ class NanoBananaBgChange(object):
             )
 
             nanobananabasicnode_7 = self.nanobananabasicnode.run(
-                gemini_key="r8_RjU8Ms3AtH8G14ZyLnXgbsrU3ifbgC52oVULq",
+                gemini_key=os.getenv("GEMINI_KEY"),
                 prompt=prompt,
                 aspect_ratio="match_input_image",
                 resolution=resolution,
