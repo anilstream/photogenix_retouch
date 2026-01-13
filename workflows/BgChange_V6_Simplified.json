@@ -1,0 +1,1090 @@
+{
+  "id": "99b9fc1d-2dbd-4a20-a014-36e4ecc0a36b",
+  "revision": 0,
+  "last_node_id": 138,
+  "last_link_id": 324,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "pos": [
+        -1000.6005249023438,
+        -557.5664672851562
+      ],
+      "size": [
+        520.1550903320312,
+        828.7615966796875
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            8,
+            235,
+            266,
+            288
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            306
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.50",
+        "Node name for S&R": "LoadImage",
+        "ue_properties": {
+          "version": "7.0.1",
+          "widget_ue_connectable": {
+            "image": true,
+            "upload": true
+          }
+        }
+      },
+      "widgets_values": [
+        "cutout (6).png",
+        "image"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "ImagePadKJ",
+      "pos": [
+        -307.6710510253906,
+        -211.07550048828125
+      ],
+      "size": [
+        289.069091796875,
+        325.16632080078125
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 8
+        },
+        {
+          "name": "mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": null
+        },
+        {
+          "name": "target_width",
+          "shape": 7,
+          "type": "INT",
+          "link": 298
+        },
+        {
+          "name": "target_height",
+          "shape": 7,
+          "type": "INT",
+          "link": 299
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            6
+          ]
+        },
+        {
+          "name": "masks",
+          "type": "MASK",
+          "links": [
+            18
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-kjnodes",
+        "ver": "1.1.3",
+        "Node name for S&R": "ImagePadKJ",
+        "ue_properties": {
+          "version": "7.0.1",
+          "widget_ue_connectable": {
+            "left": true,
+            "right": true,
+            "top": true,
+            "bottom": true,
+            "extra_padding": true,
+            "pad_mode": true,
+            "color": true
+          }
+        }
+      },
+      "widgets_values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        "color",
+        "128, 128, 128"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "ImageResizeKJv2",
+      "pos": [
+        100.0613784790039,
+        -217.504150390625
+      ],
+      "size": [
+        270,
+        336
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 6
+        },
+        {
+          "name": "mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            9
+          ]
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-kjnodes",
+        "ver": "1.1.3",
+        "Node name for S&R": "ImageResizeKJv2",
+        "ue_properties": {
+          "version": "7.0.1",
+          "widget_ue_connectable": {
+            "width": true,
+            "height": true,
+            "upscale_method": true,
+            "keep_proportion": true,
+            "pad_color": true,
+            "crop_position": true,
+            "divisible_by": true,
+            "device": true
+          }
+        }
+      },
+      "widgets_values": [
+        2048,
+        2048,
+        "bilinear",
+        "resize",
+        "0, 0, 0",
+        "center",
+        1,
+        "cpu",
+        "<tr><td>Output: </td><td><b>1</b> x <b>2048</b> x <b>2048 | 48.00MB</b></td></tr>"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "NanoBananaBasicNode",
+      "pos": [
+        535.3472290039062,
+        -471.17047119140625
+      ],
+      "size": [
+        507.1483459472656,
+        586.399169921875
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_input",
+          "type": "IMAGE",
+          "link": 9
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            16
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "anilstream/ComfyUI-NanoBananaPro",
+        "ver": "0922856eaa13f4725f8fec29fa4d3b91efaead50",
+        "Node name for S&R": "NanoBananaBasicNode",
+        "ue_properties": {
+          "version": "7.0.1",
+          "widget_ue_connectable": {
+            "gemini_key": true,
+            "prompt": true,
+            "aspect_ratio": true,
+            "resolution": true,
+            "output_format": true,
+            "safety_filter_level": true
+          }
+        }
+      },
+      "widgets_values": [
+        "r8_RjU8Ms3AtH8G14ZyLnXgbsrU3ifbgC52oVULq",
+        "\"E-commerce photo edit. Maintain the original subject (person or product) EXACTLY as it appears in the source image, including its exact pose, facial features, body proportions, framing, and camera depth.\n\nThe subject must remain 100% unchanged. Garment mask is locked — DO NOT modify garment pixels, colors, textures, patterns, or fit. Clothing stays 100% unchanged.\n\nReplace the entire background with desert with golden hour sun. The new background should be vibrant and naturally lit\n\nBlend lighting, shadows, and perspective seamlessly so the original subject looks naturally integrated into the new park environment.\n\nPhotorealistic output, clean catalog/studio aesthetic, consistent lighting, zero distortions or cloning artifacts.\n\nNote: Keep the gray padded area at the border exactly same, do not alter the gray padded area. Also, do not add extra gray padding or border at the borders.\n\nCRITICAL: Prevent Scaling and 'Un-cropping'\n\nExact Size & Scale: Maintain the subject's exact size and pixel dimensions relative to the canvas from the input image. DO NOT scale down, shrink, or resize the subject to fit the new background.\n\nRespect Original Frame Boundaries: The subject must remain cropped exactly as it is in the source image. If the subject's body or the object is cut off by any edge of the original frame (top, bottom, left, or right), DO NOT generate or invent the missing parts to complete the figure.\n\nNegative Constraint: Do not add any body parts, hair, or product parts that are not currently visible in the source image pixels. The new background must fill the canvas around the existing subject crop; it must not expand the subject itself.\n\nGoal: Background replacement only, with 100% preservation of the original subject, garments, and position.\"",
+        "match_input_image",
+        "2K",
+        "png",
+        "block_only_high"
+      ]
+    },
+    {
+      "id": 9,
+      "type": "ImageCropByMask",
+      "pos": [
+        1753.9483642578125,
+        -183.7540740966797
+      ],
+      "size": [
+        170.60995483398438,
+        46
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 17
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 95
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            231
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-kjnodes",
+        "ver": "1.1.3",
+        "Node name for S&R": "ImageCropByMask",
+        "ue_properties": {
+          "version": "7.0.1",
+          "widget_ue_connectable": {}
+        }
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 13,
+      "type": "ImageResizeKJv2",
+      "pos": [
+        1308.7335205078125,
+        -425.8994140625
+      ],
+      "size": [
+        270,
+        336
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 16
+        },
+        {
+          "name": "mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": null
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 300
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 301
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            17
+          ]
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-kjnodes",
+        "ver": "1.1.3",
+        "Node name for S&R": "ImageResizeKJv2",
+        "ue_properties": {
+          "version": "7.0.1",
+          "widget_ue_connectable": {
+            "width": true,
+            "height": true,
+            "upscale_method": true,
+            "keep_proportion": true,
+            "pad_color": true,
+            "crop_position": true,
+            "divisible_by": true,
+            "device": true
+          }
+        }
+      },
+      "widgets_values": [
+        6000,
+        6000,
+        "lanczos",
+        "resize",
+        "0, 0, 0",
+        "center",
+        1,
+        "cpu",
+        "<tr><td>Output: </td><td><b>1</b> x <b>4096</b> x <b>4096 | 192.00MB</b></td></tr>"
+      ]
+    },
+    {
+      "id": 14,
+      "type": "InvertMask",
+      "pos": [
+        1387.8778076171875,
+        -23.742244720458984
+      ],
+      "size": [
+        140,
+        26
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 18
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            95
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.50",
+        "Node name for S&R": "InvertMask",
+        "ue_properties": {
+          "version": "7.0.1",
+          "widget_ue_connectable": {}
+        }
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 24,
+      "type": "DilateErodeMask",
+      "pos": [
+        1526.0880126953125,
+        -592.5233154296875
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "masks",
+          "type": "MASK",
+          "link": 312
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            234,
+            267
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "ComfyUI-Image-Filters",
+        "ver": "f73e586470e0d65a7372b328d4bccbabfc94c180",
+        "Node name for S&R": "DilateErodeMask",
+        "ue_properties": {
+          "version": "7.0.1",
+          "widget_ue_connectable": {
+            "radius": true,
+            "shape": true
+          }
+        }
+      },
+      "widgets_values": [
+        -5,
+        "box"
+      ]
+    },
+    {
+      "id": 104,
+      "type": "easy imageDetailTransfer",
+      "pos": [
+        2344.257080078125,
+        -575.850341796875
+      ],
+      "size": [
+        470.86383056640625,
+        545.2882690429688
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "target",
+          "type": "IMAGE",
+          "link": 231
+        },
+        {
+          "name": "source",
+          "type": "IMAGE",
+          "link": 235
+        },
+        {
+          "name": "mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": 234
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            280
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-easy-use",
+        "ver": "1.3.2",
+        "Node name for S&R": "easy imageDetailTransfer",
+        "ue_properties": {
+          "version": "7.0.1",
+          "widget_ue_connectable": {
+            "mode": true,
+            "blur_sigma": true,
+            "blend_factor": true,
+            "image_output": true,
+            "save_prefix": true
+          }
+        }
+      },
+      "widgets_values": [
+        "add",
+        5.000000000000001,
+        1,
+        "Preview",
+        "ComfyUI"
+      ]
+    },
+    {
+      "id": 113,
+      "type": "Image Blend by Mask",
+      "pos": [
+        2882.621826171875,
+        -151.29254150390625
+      ],
+      "size": [
+        270,
+        98
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_a",
+          "type": "IMAGE",
+          "link": 280
+        },
+        {
+          "name": "image_b",
+          "type": "IMAGE",
+          "link": 266
+        },
+        {
+          "name": "mask",
+          "type": "IMAGE",
+          "link": 268
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "was-node-suite-comfyui",
+        "ver": "1.0.2",
+        "Node name for S&R": "Image Blend by Mask",
+        "ue_properties": {
+          "version": "7.0.1"
+        }
+      },
+      "widgets_values": [
+        0.20000000000000004
+      ]
+    },
+    {
+      "id": 114,
+      "type": "MaskToImage",
+      "pos": [
+        2508.092529296875,
+        88.26629638671875
+      ],
+      "size": [
+        184.62362670898438,
+        26
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 267
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            268
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.50",
+        "Node name for S&R": "MaskToImage",
+        "ue_properties": {
+          "version": "7.0.1"
+        }
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 123,
+      "type": "GetImageSizeAndCount",
+      "pos": [
+        -266.88232421875,
+        -508.8245849609375
+      ],
+      "size": [
+        190.86483764648438,
+        86
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 288
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null
+        },
+        {
+          "label": "2731 width",
+          "name": "width",
+          "type": "INT",
+          "links": [
+            291
+          ]
+        },
+        {
+          "label": "4096 height",
+          "name": "height",
+          "type": "INT",
+          "links": [
+            292
+          ]
+        },
+        {
+          "label": "1 count",
+          "name": "count",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-kjnodes",
+        "ver": "1.1.3",
+        "Node name for S&R": "GetImageSizeAndCount"
+      }
+    },
+    {
+      "id": 125,
+      "type": "SimpleMath+",
+      "pos": [
+        75.28683471679688,
+        -504.7046203613281
+      ],
+      "size": [
+        270,
+        98
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "a",
+          "shape": 7,
+          "type": "*",
+          "link": 291
+        },
+        {
+          "name": "b",
+          "shape": 7,
+          "type": "*",
+          "link": 292
+        },
+        {
+          "name": "c",
+          "shape": 7,
+          "type": "*",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            298,
+            299,
+            300,
+            301
+          ]
+        },
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui_essentials",
+        "ver": "9d9f4bedfc9f0321c19faf71855e228c93bd0dc9",
+        "Node name for S&R": "SimpleMath+"
+      },
+      "widgets_values": [
+        "max(a,b)"
+      ]
+    },
+    {
+      "id": 130,
+      "type": "InvertMask",
+      "pos": [
+        1181.2412109375,
+        -576.3505249023438
+      ],
+      "size": [
+        140,
+        26
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 306
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            312
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.50",
+        "Node name for S&R": "InvertMask",
+        "ue_properties": {
+          "version": "7.0.1",
+          "widget_ue_connectable": {}
+        }
+      }
+    }
+  ],
+  "links": [
+    [
+      6,
+      2,
+      0,
+      5,
+      0,
+      "IMAGE"
+    ],
+    [
+      8,
+      1,
+      0,
+      2,
+      0,
+      "IMAGE"
+    ],
+    [
+      9,
+      5,
+      0,
+      7,
+      0,
+      "IMAGE"
+    ],
+    [
+      16,
+      7,
+      0,
+      13,
+      0,
+      "IMAGE"
+    ],
+    [
+      17,
+      13,
+      0,
+      9,
+      0,
+      "IMAGE"
+    ],
+    [
+      18,
+      2,
+      1,
+      14,
+      0,
+      "MASK"
+    ],
+    [
+      95,
+      14,
+      0,
+      9,
+      1,
+      "MASK"
+    ],
+    [
+      231,
+      9,
+      0,
+      104,
+      0,
+      "IMAGE"
+    ],
+    [
+      234,
+      24,
+      0,
+      104,
+      2,
+      "MASK"
+    ],
+    [
+      235,
+      1,
+      0,
+      104,
+      1,
+      "IMAGE"
+    ],
+    [
+      266,
+      1,
+      0,
+      113,
+      1,
+      "IMAGE"
+    ],
+    [
+      267,
+      24,
+      0,
+      114,
+      0,
+      "MASK"
+    ],
+    [
+      268,
+      114,
+      0,
+      113,
+      2,
+      "IMAGE"
+    ],
+    [
+      280,
+      104,
+      0,
+      113,
+      0,
+      "IMAGE"
+    ],
+    [
+      288,
+      1,
+      0,
+      123,
+      0,
+      "IMAGE"
+    ],
+    [
+      291,
+      123,
+      1,
+      125,
+      0,
+      "*"
+    ],
+    [
+      292,
+      123,
+      2,
+      125,
+      1,
+      "*"
+    ],
+    [
+      298,
+      125,
+      0,
+      2,
+      2,
+      "INT"
+    ],
+    [
+      299,
+      125,
+      0,
+      2,
+      3,
+      "INT"
+    ],
+    [
+      300,
+      125,
+      0,
+      13,
+      2,
+      "INT"
+    ],
+    [
+      301,
+      125,
+      0,
+      13,
+      3,
+      "INT"
+    ],
+    [
+      306,
+      1,
+      1,
+      130,
+      0,
+      "MASK"
+    ],
+    [
+      312,
+      130,
+      0,
+      24,
+      0,
+      "MASK"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 2,
+      "title": "Resize & Pad",
+      "bounding": [
+        -427.9006652832031,
+        -729.6790161132812,
+        852.1155395507812,
+        1153.5589599609375
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "Detail Restore",
+      "bounding": [
+        1120.0037841796875,
+        -718.3587646484375,
+        876.8626098632812,
+        1136.3519287109375
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "NanoBananaPro",
+      "bounding": [
+        442.94866943359375,
+        -723.7639770507812,
+        651.1801147460938,
+        1148.267822265625
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 5,
+      "title": "Input",
+      "bounding": [
+        -1028.673828125,
+        -737.9296264648438,
+        583.9644775390625,
+        1152.1124267578125
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 7,
+      "title": "Detail Restore",
+      "bounding": [
+        2019.509765625,
+        -707.77734375,
+        1224.2662353515625,
+        1126.908447265625
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ue_links": [],
+    "links_added_by_ue": [],
+    "ds": {
+      "scale": 0.43056764313425167,
+      "offset": [
+        1131.4722436926197,
+        1055.7733673499786
+      ]
+    },
+    "frontendVersion": "1.23.4",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

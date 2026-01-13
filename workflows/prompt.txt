@@ -1,0 +1,21 @@
+"E-commerce photo edit. Maintain the original subject (person or product) EXACTLY as it appears in the source image, including its exact pose, facial features, body proportions, framing, and camera depth.
+
+The subject must remain 100% unchanged. Garment mask is locked — DO NOT modify garment pixels, colors, textures, patterns, or fit. Clothing stays 100% unchanged.
+
+Replace the entire background with desert with golden hour sun. The new background should be vibrant and naturally lit
+
+Blend lighting, shadows, and perspective seamlessly so the original subject looks naturally integrated into the new park environment.
+
+Photorealistic output, clean catalog/studio aesthetic, consistent lighting, zero distortions or cloning artifacts.
+
+Note: Keep the gray padded area at the border exactly same, do not alter the gray padded area. Also, do not add extra gray padding or border at the borders.
+
+CRITICAL: Prevent Scaling and 'Un-cropping'
+
+Exact Size & Scale: Maintain the subject's exact size and pixel dimensions relative to the canvas from the input image. DO NOT scale down, shrink, or resize the subject to fit the new background.
+
+Respect Original Frame Boundaries: The subject must remain cropped exactly as it is in the source image. If the subject's body or the object is cut off by any edge of the original frame (top, bottom, left, or right), DO NOT generate or invent the missing parts to complete the figure.
+
+Negative Constraint: Do not add any body parts, hair, or product parts that are not currently visible in the source image pixels. The new background must fill the canvas around the existing subject crop; it must not expand the subject itself.
+
+Goal: Background replacement only, with 100% preservation of the original subject, garments, and position."

@@ -29,6 +29,19 @@ RUN git clone https://github.com/anilstream/ComfyUI-NanoBananaPro
 RUN git clone https://github.com/lquesada/ComfyUI-Inpaint-CropAndStitch
 
 
+
+RUN git clone https://github.com/kijai/ComfyUI-KJNodes
+RUN pip install -r ComfyUI-KJNodes/requirements.txt
+RUN git clone https://github.com/cubiq/ComfyUI_essentials
+RUN pip install -r ComfyUI_essentials/requirements.txt
+RUN git clone https://github.com/yolain/ComfyUI-Easy-Use
+RUN pip install -r ComfyUI-Easy-Use/requirements.txt
+RUN git clone https://github.com/WASasquatch/was-node-suite-comfyui
+RUN pip install -r was-node-suite-comfyui/requirements.txt
+RUN git clone https://github.com/spacepxl/ComfyUI-Image-Filters
+RUN pip install -r ComfyUI-Image-Filters/requirements.txt
+
+
 # copy source files
 WORKDIR /app
 COPY . .

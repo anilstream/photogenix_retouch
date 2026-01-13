@@ -12,7 +12,7 @@ from typing import Any, Mapping, Sequence, Union
 import requests
 import numpy as np
 import torch
-from PIL import Image
+from PIL import Image,ImageOps
 
 logger = logging.getLogger(__name__)
 
@@ -217,7 +217,7 @@ def output_to_bytes(processed_image):
         if processed_image.shape[0] == 1:
             processed_image = np.repeat(processed_image, 3, axis=0)
         processed_image = (processed_image * 255).astype(np.uint8)
-    processed_image = Image.fromarray(processed_image)
+    processed_image = Image.fromarray(processed_image) if isinstance(processed_image, np.ndarray) else processed_image # pil already
 
     with BytesIO() as byte_stream:
         processed_image.save(byte_stream, format='JPEG')
@@ -252,3 +252,44 @@ def fetch_image_data(image_url, attempts=5, timeout=30):
                 sleep(2 ** attempt)  # Exponential backoff: 1s, 2s, 4s
     logger.error(f"failed to fetch image from URL after {attempts} attempts: {image_url}")
     return None
+
+def get_foreground_mask(image: bytes, mask_only='true') -> bytes:
+    files = {'image': image}
+    data = {'mask_only': mask_only}
+    bgremoval_url = "https://twindragon.catalogix.ai/background-removal/rembg/model/candidate/cutout"
+
+    try:
+        response = requests.post(bgremoval_url, files=files, data=data)
+        response.raise_for_status()
+        logger.info("Background removal successful!")
+        result = response.content
+        return result
+    except Exception as e:
+        logger.exception(f"Background removal failed: {e}", exc_info=True)
+        return None
+
+
+def get_rgba_image(image_bytes: bytes, mask_bytes: bytes) -> bytes:
+    """
+    Accepts raw image bytes + mask bytes.
+    Applies mask as alpha.
+    Returns final RGBA PNG bytes.
+    """
+    # Load input image
+    image = Image.open(BytesIO(image_bytes)).convert("RGB")
+
+    # Load mask
+    mask = Image.open(BytesIO(mask_bytes)).convert("L")  # L = 8-bit mask
+
+    # Ensure mask matches dimensions
+    if mask.size != image.size:
+        mask = mask.resize(image.size)
+
+    # Add alpha channel from mask
+    rgba_image = image.copy()
+    rgba_image.putalpha(mask)
+
+    # Convert to PNG bytes
+    output = BytesIO()
+    rgba_image.save(output, format="PNG")
+    return output.getvalue()

@@ -31,12 +31,12 @@ gcloud run deploy retouch-api \
   --region=asia-south1 \
   --allow-unauthenticated \
   --port=5007 \
-  --min-instances 1 \
+  --min-instances 2 \
   --max-instances 100 \
   --concurrency 1 \
   --timeout 300 \
   --cpu 2 \
-  --memory 4Gi \
+  --memory 6Gi \
   --execution-environment gen2 \
   --no-cpu-throttling \
   --cpu-boost \
