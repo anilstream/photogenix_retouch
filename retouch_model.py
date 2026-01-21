@@ -17,6 +17,8 @@ from retouch_utils import (
     output_to_bytes,
 )
 
+from PIL import Image
+
 # ---- ComfyUI bootstrap ----
 add_comfyui_directory_to_sys_path()
 add_extra_model_paths()
@@ -37,11 +39,21 @@ class NanoBananaMaskedInpaint(object):
         self.prompt_suffix = "Everything else in the image exactly same, including all other people, garment, background, lighting, poses and facial features. Make sure inpainted region/object does not touch image border. Make sure inpainted object/region is not cropped by image border."
 
     def run(self, image, mask, prompt, resolution='1K',
-            mask_expand_pixels=40, mask_blend_pixels=3, mask_hipass_filter=0.1, mask_fill_holes=False):
+            mask_expand_pixels=80, mask_blend_pixels=9, mask_hipass_filter=0.1, mask_fill_holes=False):
 
         # choose the processing resolution
         size = 1024 if resolution == "1K" else 2048 if resolution == "2K" else 4096
         prompt = prompt + self.prompt_suffix
+
+        # verify the file paths
+        if not os.path.exists(image):
+            raise FileNotFoundError(f"Input image path does not exist: {image}")
+
+        if not os.path.exists(mask):
+            raise FileNotFoundError(f"Mask path does not exist: {mask}")
+
+        print("IMAGE SIZE: ",Image.open(image).size)
+        print("MASK SIZE: ", Image.open(mask).size)
 
         with torch.inference_mode():
             input_image = self.loadimage.load_image(
@@ -68,7 +80,7 @@ class NanoBananaMaskedInpaint(object):
                 extend_down_factor=1,
                 extend_left_factor=1,
                 extend_right_factor=1,
-                context_from_mask_extend_factor=1.3,
+                context_from_mask_extend_factor=1,
                 output_resize_to_target_size=True,
                 output_target_width=size,
                 output_target_height=size,

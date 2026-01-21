@@ -316,7 +316,11 @@ def mask_to_region(
 
     # nothing valid → empty
     if cleaned.sum() == 0:
-        return Image.new("L", mask.size, 0)
+        empty = Image.new("L", mask.size, 0)
+        output = BytesIO()
+        empty.save(output, format="PNG")
+        logger.warning("empty mask found...")
+        return output.getvalue()
 
     regions = regionprops(label(cleaned))
 
@@ -332,7 +336,11 @@ def mask_to_region(
 
     # square impossible → full image mask
     if side > min(h, w):
-        return Image.new("L", (w, h), 255)
+        full = Image.new("L", (w, h), 255)
+        output = BytesIO()
+        full.save(output, format="PNG")
+        logger.warning("using full mask...")
+        return output.getvalue()
 
     # square positioning
     cy = (minr + maxr) // 2

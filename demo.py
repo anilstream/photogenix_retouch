@@ -254,6 +254,11 @@ def get_sam3_text_mask(image: Image.Image, prompt: str) -> Image.Image:
         output = response.json()
         assert 'output' in output, f"invalid mask: {output}"
 
+        if not output['output']:
+            empty = Image.new("L", image.size, 0)
+            logger.warning(f"empty mask found...")
+            return empty
+
         mask_base64 = output['output'][0]['mask']
         mask_bytes = base64_to_bytes(mask_base64)
 
