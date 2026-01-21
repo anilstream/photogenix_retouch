@@ -16,7 +16,7 @@ import uvicorn
 
 # Local application
 from retouch_model import NanoBananaMaskedInpaint, NanoBananaBgChange
-from retouch_utils import fetch_image_data, get_foreground_mask, get_rgba_image
+from retouch_utils import fetch_image_data, get_foreground_mask, get_rgba_image, mask_to_region
 
 
 masked_inpainter = NanoBananaMaskedInpaint()
@@ -51,13 +51,17 @@ def retouch_preset_predict_get(request: Request):
 @app.post("/retouch/masked/generate")
 async def retouch_preset_predict_post(request: Request, image: UploadFile = File(...), mask: UploadFile = File(None),
                                       image_url: HttpUrl = Form(None), mask_url: HttpUrl = Form(None),
-                                      prompt: str = Form(...), resolution: Literal["1K", "2K", "4K"] = Form("1K")):
+                                      prompt: str = Form(...), resolution: Literal["1K", "2K", "4K"] = Form("1K"),
+                                      square_region: bool = Form(True)):
     try:
         t1 = time.perf_counter()
         logger.info(f"prompt: {prompt}")
 
         image = fetch_image_data(image_url) if image_url  else await image.read()
         mask =  fetch_image_data(mask_url) if mask_url else await mask.read()
+
+        if square_region:
+            mask = mask_to_region(mask)
 
         with tempfile.NamedTemporaryFile(suffix=".png", delete=True) as temp_image, \
                 tempfile.NamedTemporaryFile(suffix=".png", delete=True) as temp_mask:

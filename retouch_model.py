@@ -34,12 +34,14 @@ class NanoBananaMaskedInpaint(object):
         self.inpaintcropimproved = NODE_CLASS_MAPPINGS["InpaintCropImproved"]()
         self.nanobananabasicnode = NODE_CLASS_MAPPINGS["NanoBananaBasicNode"]()
         self.inpaintstitchimproved = NODE_CLASS_MAPPINGS["InpaintStitchImproved"]()
+        self.prompt_suffix = "Everything else in the image exactly same, including all other people, garment, background, lighting, poses and facial features. Make sure inpainted region/object does not touch image border. Make sure inpainted object/region is not cropped by image border."
 
     def run(self, image, mask, prompt, resolution='1K',
-            mask_expand_pixels=40, mask_blend_pixels=32, mask_hipass_filter=0.1, mask_fill_holes=False):
+            mask_expand_pixels=40, mask_blend_pixels=3, mask_hipass_filter=0.1, mask_fill_holes=False):
 
         # choose the processing resolution
         size = 1024 if resolution == "1K" else 2048 if resolution == "2K" else 4096
+        prompt = prompt + self.prompt_suffix
 
         with torch.inference_mode():
             input_image = self.loadimage.load_image(
@@ -66,13 +68,14 @@ class NanoBananaMaskedInpaint(object):
                 extend_down_factor=1,
                 extend_left_factor=1,
                 extend_right_factor=1,
-                context_from_mask_extend_factor=1.2,
+                context_from_mask_extend_factor=1.3,
                 output_resize_to_target_size=True,
                 output_target_width=size,
                 output_target_height=size,
                 output_padding="32",
                 image=get_value_at_index(input_image, 0),
                 mask=get_value_at_index(input_mask, 0),
+                device_mode="cpu (compatible)"
             )
 
             nanobananabasicnode_38 = self.nanobananabasicnode.run(
